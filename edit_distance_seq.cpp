@@ -1,6 +1,8 @@
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <algorithm>
+#include <chrono>
 
 int computeSeqED(const std::string &A, const std::string &B){
 
@@ -38,11 +40,38 @@ int computeSeqED(const std::string &A, const std::string &B){
     return dp_matrix[n][m];
 }
 
-int main(){
+int main(int argc, char* argv[]){
+
+    if(argc < 3){
+        std::cerr << "Usage: ./edit_distance_seq <fileA> <fileB>\n";
+        return 1;
+    }
+
+    std::ifstream fileA(argv[1]);
+    if(!fileA){
+        std::cerr << "Error opening file A" << std::endl;
+        return 1;
+    }
+
+    std::ifstream fileB(argv[2]);
+    if(!fileB){
+        std::cerr << "Error opening file B" << std::endl;
+        return 1;
+    }
+
+    std::string stringA;
+    std::string stringB;
+    std::getline(fileA, stringA);
+    std::getline(fileB, stringB);
+
+    fileA.close();
+    fileB.close();
     
-    std::string A = "Ciao";
-    std::string B = "Caio";
-    int result = computeSeqED(A, B);
-    std::cout << result;
+    auto start = std::chrono::high_resolution_clock::now();
+    int result = computeSeqED(stringA, stringB);
+    auto end = std::chrono::high_resolution_clock::now();
+
+    std::chrono::duration<double> elapsed = end-start;
+    std::cout << "Elapsed time: " << elapsed.count() << " seconds" << std::endl;
     return 0;
 }
