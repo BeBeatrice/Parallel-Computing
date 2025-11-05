@@ -39,5 +39,17 @@ int main(int argc, char* argv[]){
         return 1;
     }
 
-    std::cout << "Saved to " << fileA << " and " << fileB << "\n";
+    outA << A;
+    outB << B;
+
+    outA.close();
+    outB.close();
+
+    std::cout << "Generated two random DNA-like strings of length " << length << ":\n";
+    std::cout << "A (first 20 chars): " << A.substr(0, std::min(20, length))
+              << (length > 20 ? "..." : "") << "\n";
+    std::cout << "B (first 20 chars): " << B.substr(0, std::min(20, length))
+              << (length > 20 ? "..." : "") << "\n";
+    std::cout << "Saved to: " << fileA << " and " << fileB << std::endl;
+
 }
