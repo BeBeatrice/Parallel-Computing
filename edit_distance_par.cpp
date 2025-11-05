@@ -162,7 +162,7 @@ int main(int argc, char* argv[]){
     if (rank == 0) {
         if(argc < 3){
             std::cerr << "Usage: ./edit_distance_par <fileA> <fileB>\n";
-            MPI_Abort(MPI_COMM_WORLD, 1); // Uscita pulita in caso di errore
+            MPI_Abort(MPI_COMM_WORLD, 1); 
         }
 
         std::ifstream fileA(argv[1]);
@@ -185,7 +185,7 @@ int main(int argc, char* argv[]){
     int lenA = (rank == 0) ? stringA.length() : 0;
     int lenB = (rank == 0) ? stringB.length() : 0;
     
-    // 1. Bcast delle lunghezze
+    // cast length of strings to all ranks
     MPI_Bcast(&lenA, 1, MPI_INT, 0, MPI_COMM_WORLD);
     MPI_Bcast(&lenB, 1, MPI_INT, 0, MPI_COMM_WORLD);
     
