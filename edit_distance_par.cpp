@@ -134,7 +134,7 @@ int computeParED(const string &A, const string &B, int rank, int size) {
         // prev_diag becomes prev_prev_diag
         // current becomes prev_diag
         
-        prev_prev_diag = prev_diag; Copia
+        prev_prev_diag = prev_diag; 
         
         int k_idx = 0;
         for (int i = i_start; i <= i_end; ++i) {
@@ -173,8 +173,6 @@ int main(int argc, char* argv[]){
             MPI_Abort(MPI_COMM_WORLD, 1);
         }
 
-        std::string stringA;
-        std::string stringB;
         std::getline(fileA, stringA);
         std::getline(fileB, stringB);
 
